@@ -4,6 +4,25 @@ from PIL import Image
 
 
 class WhatIsThat:
+    """
+    Class WhatIsThat:  Loads a ResNet101 or AlexNet that has been pretrained on
+    ImageNet, and runs it with no training or fine tuning on an input user image.
+
+    Sample usage:
+
+        model = WhatIsThat()
+        model.load_image('my_custom_image.jpg')
+        model.run_resnet()
+        model.identify_top5()
+
+    `identify_top5()` returns the top 5 predicted classes and the probability
+    of each class
+
+    The model assumes that it is in a "code" folder, and there is a neighboring
+    data folder with a file of classnames that can be changed/initializes when
+    calling the class
+    """
+
     def __init__(self, classnames_file="../data/imagenet_classes.txt"):
         self._load_models(classnames_file)
         self._image_transformations()
@@ -62,50 +81,6 @@ def main():
     output = classifier.identify_top5()
     for i in output:
         print(i)
-
-    # filename = 'lizard.jpeg'
-
-    # classifier = What_is_that()
-
-    # classifier.load_image(filename)
-    # classifier.run_resnet()
-    # what_is_it, percent = classifier.identify_best()
-    # print(what_is_it, percent)
-
-    # output = classifier.identify_top5()
-    # for i in output:
-    #     print(i)
-
-    # print('')
-    # print('Pepper! ')
-    # classifier.load_image('pepper.jpeg')
-    # classifier.run_resnet()
-    # output = classifier.identify_top5()
-    # for i in output:
-    #     print(i)
-
-    # print('')
-    # print('Emma! ')
-    # classifier.load_image('emma.jpeg')
-    # classifier.run_resnet()
-    # output = classifier.identify_top5()
-    # for i in output:
-    #     print(i)
-
-    # print('')
-    # print('Cat! ')
-    # classifier.load_image('cat.jpeg')
-    # classifier.run_resnet()
-    # output = classifier.identify_top5()
-    # for i in output:
-    #     print(i)
-    # print('')
-    # print('Other Cat! ')
-    # classifier.load_image('cat2.jpeg')
-    # classifier.run_resnet()
-    # output = classifier.identify_top5()
-    # for i in output:
-    #     print(i)
 
 
 if __name__ == "__main__":
